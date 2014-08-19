@@ -1,0 +1,124 @@
+﻿@model ASP.NET_MVC5.Models.Meeting
+
+@{
+    ViewBag.Title = "Get";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Get</h2>
+
+<div>
+    <h4>Meeting</h4>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.longtitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.longtitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.creator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.creator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.confirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.confirmed)
+        </dd>
+
+    </dl>
+    <img src="http://maps.googleapis.com/maps/api/staticmap?zoom=5&size=400x200&maptype=roadmap
+&markers=color:red%7Clabel:Here%7C
+         @Model.latitude,
+         @Model.longtitude
+         " width="400" height="200" />
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (Model.isOwner)
+        {
+            <script>
+                
+                function confirm(acceptId) {
+                    var path =  window.location.pathname;
+                    $.ajax({
+                        url: '/meeting/confirm' ,
+                        type: 'POST' ,
+                        data : { 'id' : acceptId
+                        },
+                        success: function (result) {
+                            alert("Success");
+                            window.location.reload();
+                        },
+                        fail: function(result){
+                            alert("Success");
+                            window.location.reload();
+                        }
+                    });
+                };
+            
+            </script>
+            foreach (var accept in Model.Accepts)
+            {
+                <div class="dl-horizontal">
+                    
+                    <p>@accept.Id<span /> @accept.AspNetUser.UserName<span /> @accept.text  <button onclick="confirm(@accept.Id)">Confirm this</button></p>
+                    
+                </div>
+            }
+        }
+        else
+        {
+            if (Model.isAccepter)
+            {
+                <p>You wrote: @Model.CurrentUserAccept.text</p>
+            }
+            else
+            {
+                    @Html.Partial("Accept", new ASP.NET_MVC5.Models.MeetingAccept(){ meetingId = Model.Id })
+            }
+        }
+    }
+    else
+    {
+        <p>Firstly <a href="/account/login/">login</a>, then request an permission to accept.</p>
+    }
+</div>
+
