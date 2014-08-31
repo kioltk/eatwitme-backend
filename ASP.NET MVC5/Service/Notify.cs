@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ASP.NET_MVC5.Models;
+using ASP.NET_MVC5.Repositories;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace ASP.NET_MVC5.Service
 {
     public class Notify
     {
-        private static string GoogleAppID = "AIzaSyCs8cUk_79GKjk-45JNkvoAQt36gdK9KHU";
+        private static string GoogleAppID = "AIzaSyAqLQopxscmV8MLvqoPvCOlIKckyOoBo5E";
         public static String SendCommandToPhone(String message, string registrationid)
         {
             String DeviceID = "";
@@ -46,6 +48,28 @@ namespace ASP.NET_MVC5.Service
             dataStream.Close();
             tResponse.Close();
             return sResponseFromServer;
+        }
+
+        public static void NewMeeting(Models.Meeting meeting)
+        {
+            var usersRep = new UserRepository();
+            var seekers = usersRep.AspNetUsers.Where(x => x.registrationId != null);
+            foreach(var seeker in seekers){
+                SendCommandToPhone("new meeting", seeker.registrationId);
+            }
+        }
+
+        public static void NewAccept(Models.MeetingAccept accept)
+        {
+            var owner = accept.Meeting.AspNetUser;
+            SendCommandToPhone("new accept", owner.registrationId);
+        }
+        
+        public static void Confirm(Models.MeetingAccept meetingAccept)
+        {
+
+            var accepter = meetingAccept.AspNetUser;
+            SendCommandToPhone("confirmed", accepter.registrationId);
         }
     }
 }

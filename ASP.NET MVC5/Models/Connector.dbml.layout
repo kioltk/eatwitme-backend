@@ -32,71 +32,71 @@
         <elementListCompartment Id="28b15810-9250-4a1c-96a6-e29080f726e2" absoluteBounds="5.8900000000000006, 2.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ded0dc42-d3e8-49cf-8ca6-68c522c24d59" absoluteBounds="5.875, 4.5, 2, 2.1554996744791666">
-      <DataClassMoniker Name="/ConnectorDataContext/AspNetUser" />
-      <nestedChildShapes>
-        <elementListCompartment Id="7af42b30-ce29-4afe-9092-0c80a6e8f49e" absoluteBounds="5.89, 4.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="9148c9c9-c603-4d12-b202-63898e23f204" absoluteBounds="2.625, 5, 2, 1.9631982421875005">
       <DataClassMoniker Name="/ConnectorDataContext/MeetingAccept" />
       <nestedChildShapes>
         <elementListCompartment Id="cea67abe-5653-4e77-a0ae-2982f86805b2" absoluteBounds="2.6400000000000006, 5.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.25 : 2.47199625651042); (5.875 : 2.47199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.25 : 2.47199625651042); (5.875 : 2.47199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ConnectorDataContext/AspNetRole/AspNetRole_AspNetUserRole" />
       <nodes>
         <classShapeMoniker Id="26c7087f-1cde-47d2-8efb-14e220109026" />
         <classShapeMoniker Id="fb7623ce-0345-4f24-b83b-fef5e9282f09" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.875 : 6.65549967447917); (6.875 : 8.82774983723958); (5.375 : 8.82774983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_Meeting" />
-      <nodes>
-        <classShapeMoniker Id="ded0dc42-d3e8-49cf-8ca6-68c522c24d59" />
-        <classShapeMoniker Id="5aa71733-a285-4d80-b815-e92a247ac4bd" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(6.3437475 : 6.65549967447917); (6.3437475 : 8.25762241861979); (5.375 : 8.25762241861979)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_Meeting1" />
-      <nodes>
-        <classShapeMoniker Id="ded0dc42-d3e8-49cf-8ca6-68c522c24d59" />
-        <classShapeMoniker Id="5aa71733-a285-4d80-b815-e92a247ac4bd" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(7.875 : 6.45274983723958); (8.625 : 6.45274983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_AspNetUserClaim" />
-      <nodes>
-        <classShapeMoniker Id="ded0dc42-d3e8-49cf-8ca6-68c522c24d59" />
-        <classShapeMoniker Id="2aa064e2-1c29-4d37-a6dd-60643916afe4" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(7.875 : 5.00564697265625); (8.625 : 5.00564697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_AspNetUserLogin" />
-      <nodes>
-        <classShapeMoniker Id="ded0dc42-d3e8-49cf-8ca6-68c522c24d59" />
-        <classShapeMoniker Id="9e120b8a-6922-4caf-b650-841a8d2d7a91" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(6.875 : 4.5); (6.875 : 3.19399251302083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_AspNetUserRole" />
-      <nodes>
-        <classShapeMoniker Id="ded0dc42-d3e8-49cf-8ca6-68c522c24d59" />
-        <classShapeMoniker Id="fb7623ce-0345-4f24-b83b-fef5e9282f09" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5.875 : 5.82774983723958); (4.625 : 5.82774983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_MeetingAccept" />
-      <nodes>
-        <classShapeMoniker Id="ded0dc42-d3e8-49cf-8ca6-68c522c24d59" />
-        <classShapeMoniker Id="9148c9c9-c603-4d12-b202-63898e23f204" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(4 : 7.75); (4 : 6.9631982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4 : 7.75); (4 : 6.9631982421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ConnectorDataContext/Meeting/Meeting_MeetingAccept" />
       <nodes>
         <classShapeMoniker Id="5aa71733-a285-4d80-b815-e92a247ac4bd" />
+        <classShapeMoniker Id="9148c9c9-c603-4d12-b202-63898e23f204" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="33fc100d-946e-4460-995d-12e845fe6cce" absoluteBounds="6.125, 5.25, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/ConnectorDataContext/AspNetUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fbb2d76b-9cce-4468-9ed9-f702ed50dbd5" absoluteBounds="6.14, 5.71, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.125 : 7.31174967447917); (5.03125 : 7.31174967447917); (5.03125 : 7.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_Meeting" />
+      <nodes>
+        <classShapeMoniker Id="33fc100d-946e-4460-995d-12e845fe6cce" />
+        <classShapeMoniker Id="5aa71733-a285-4d80-b815-e92a247ac4bd" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.125 : 7.486027890625); (5.2343775 : 7.486027890625); (5.2343775 : 7.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_Meeting1" />
+      <nodes>
+        <classShapeMoniker Id="33fc100d-946e-4460-995d-12e845fe6cce" />
+        <classShapeMoniker Id="5aa71733-a285-4d80-b815-e92a247ac4bd" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.125 : 6.92390055338542); (8.625 : 6.92390055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_AspNetUserClaim" />
+      <nodes>
+        <classShapeMoniker Id="33fc100d-946e-4460-995d-12e845fe6cce" />
+        <classShapeMoniker Id="2aa064e2-1c29-4d37-a6dd-60643916afe4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.125 : 5.25); (7.125 : 4.6874995); (8.625 : 4.6874995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_AspNetUserLogin" />
+      <nodes>
+        <classShapeMoniker Id="33fc100d-946e-4460-995d-12e845fe6cce" />
+        <classShapeMoniker Id="9e120b8a-6922-4caf-b650-841a8d2d7a91" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.5625 : 5.25); (6.5625 : 3.19399251302083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_AspNetUserRole" />
+      <nodes>
+        <classShapeMoniker Id="33fc100d-946e-4460-995d-12e845fe6cce" />
+        <classShapeMoniker Id="fb7623ce-0345-4f24-b83b-fef5e9282f09" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.125 : 6.10659912109375); (4.625 : 6.10659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ConnectorDataContext/AspNetUser/AspNetUser_MeetingAccept" />
+      <nodes>
+        <classShapeMoniker Id="33fc100d-946e-4460-995d-12e845fe6cce" />
         <classShapeMoniker Id="9148c9c9-c603-4d12-b202-63898e23f204" />
       </nodes>
     </associationConnector>

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using ASP.NET_MVC5.Models;
+using ASP.NET_MVC5.Service;
 
 namespace ASP.NET_MVC5.Controllers
 {
@@ -40,8 +41,11 @@ namespace ASP.NET_MVC5.Controllers
                 var meetingRep = new MeetingRepository();
                 
                 id = meetingRep.Create(meeting);
-                if(id>-1)
+                if (id > -1)
+                {
+                    Notify.NewMeeting(meeting);
                     return RedirectToAction("Get", new { id = id });
+                }
                 throw new Exception();
             }
             else 
@@ -73,6 +77,8 @@ namespace ASP.NET_MVC5.Controllers
             int id = meetingRep.Create(accept);
             if (id > 0)
             {
+
+                Notify.NewAccept(accept);
                 return View(true);
             }
 
@@ -97,12 +103,14 @@ namespace ASP.NET_MVC5.Controllers
             {
                 meeting.confirmed = meetingAccept.accepterId;
                 meetingRep.Update(meeting);
+
             }
             else
             {
                 throw new Exception();
             }
 
+                Notify.Confirm(meetingAccept);
             return PartialView();
         }
         [AllowAnonymous]

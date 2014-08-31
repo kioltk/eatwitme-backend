@@ -17,6 +17,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Id)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.longtitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.latitude)
+        </th>
         
         <th></th>
     </tr>
@@ -32,6 +38,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.Id)
         </td>
+        <th>
+            @Html.DisplayFor(modelItem => item.longtitude)
+        </th>
+        <th>
+            @Html.DisplayFor(modelItem => item.latitude)
+        </th>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

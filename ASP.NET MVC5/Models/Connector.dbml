@@ -46,23 +46,6 @@
       <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
-    <Type Name="AspNetUser">
-      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="UserName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Discriminator" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="lat" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="long" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="AspNetUser_Meeting" Member="Meetings" ThisKey="Id" OtherKey="confirmed" Type="Meeting" />
-      <Association Name="AspNetUser_Meeting1" Member="Meetings1" ThisKey="Id" OtherKey="creator" Type="Meeting" />
-      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="User_Id" Type="AspNetUserClaim" />
-      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
-      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
-      <Association Name="AspNetUser_MeetingAccept" Member="MeetingAccepts" ThisKey="Id" OtherKey="accepterId" Type="MeetingAccept" />
-    </Type>
-  </Table>
   <Table Name="dbo.MeetingAccepts" Member="MeetingAccepts">
     <Type Name="MeetingAccept">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -71,8 +54,26 @@
       <Column Name="confirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="text" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="time" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="AspNetUser_MeetingAccept" Member="AspNetUser" ThisKey="accepterId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
       <Association Name="Meeting_MeetingAccept" Member="Meeting" ThisKey="meetingId" OtherKey="Id" Type="Meeting" IsForeignKey="true" />
+      <Association Name="AspNetUser_MeetingAccept" Member="AspNetUser" ThisKey="accepterId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
+    <Type Name="AspNetUser">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Discriminator" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="latitude" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="longtitude" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="registrationId" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Association Name="AspNetUser_Meeting" Member="Meetings" ThisKey="Id" OtherKey="confirmed" Type="Meeting" />
+      <Association Name="AspNetUser_Meeting1" Member="Meetings1" ThisKey="Id" OtherKey="creator" Type="Meeting" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="User_Id" Type="AspNetUserClaim" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
+      <Association Name="AspNetUser_MeetingAccept" Member="MeetingAccepts" ThisKey="Id" OtherKey="accepterId" Type="MeetingAccept" />
     </Type>
   </Table>
 </Database>

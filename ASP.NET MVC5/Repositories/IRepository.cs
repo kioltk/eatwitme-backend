@@ -12,9 +12,18 @@ namespace ASP.NET_MVC5.Repositories
     {
         protected ConnectorDataContext context = new ConnectorDataContext(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
 
-        protected void SubmitChanges()
+        protected bool SubmitChanges()
         {
-            context.SubmitChanges();
+            try
+            {
+
+                context.SubmitChanges();
+                return true;
+            }
+            catch (Exception exp)
+            {
+                return false;
+            }
         }
     }
 }

@@ -44,11 +44,22 @@ namespace ASP.NET_MVC5.Repositories
         }
         
         public int Create(MeetingAccept accept){
-            if(accept.Id==0){
 
-                context.MeetingAccepts.InsertOnSubmit(accept);
-                SubmitChanges();
-                return accept.Id;
+            if (accept.Id == 0)
+            {
+                try
+                {
+
+                    context.MeetingAccepts.InsertOnSubmit(accept);
+                    SubmitChanges();
+
+
+                    return accept.Id;
+                }
+                catch (Exception)
+                {
+
+                }
             }
             return -1;
         }

@@ -3,6 +3,7 @@ using ASP.NET_MVC5.Api.Models;
 using ASP.NET_MVC5.Mappers;
 using ASP.NET_MVC5.Models;
 using ASP.NET_MVC5.Repositories;
+using ASP.NET_MVC5.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,6 +82,7 @@ namespace ASP.NET_MVC5.Api.Controllers
                 id = meetingRep.Create(meeting);
                 if (id > -1)
                 {
+                    Notify.NewMeeting(meeting);
                     return Response(new { id = id });
                 }
             }
@@ -121,6 +123,7 @@ namespace ASP.NET_MVC5.Api.Controllers
             int acceptId = meetingRep.Create(accept);
             if (acceptId > 0)
             {
+                Notify.NewAccept(accept);
                 return Response(acceptId);
             }
 
@@ -157,6 +160,7 @@ namespace ASP.NET_MVC5.Api.Controllers
                 return new UnauthorizedError("Not owner");
             }
 
+            Notify.Confirm(meetingAccept);
             return Response(true);
             // todo: return 
         }

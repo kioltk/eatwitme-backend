@@ -15,12 +15,12 @@ using System.Web;
 using System.Web.Http;
 
 namespace ASP.NET_MVC5.Api.Controllers
-{   
+{
     [ApiAuthorize]
     public class AccountController : SuperApiController
     {
 
-       
+
         private IAuthenticationManager AuthenticationManager
         {
             get
@@ -51,11 +51,24 @@ namespace ASP.NET_MVC5.Api.Controllers
             }
             return new BadRequestError("Bad credits");
         }
-        
+
         [HttpGet]
         public string Index()
         {
             return "Try me";
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<Response> Register(string login, string password)
+        {
+            var user = new ApplicationUser() { UserName = login };
+            var result = await UserManager.CreateAsync(user, password);
+            if (result.Succeeded)
+            {
+                await SignInAsync(user, isPersistent: false);
+                return Response(CommonMapper.Map(user));
+            }
+            return new BadRequestError("Bad credits");
         }
 
 

@@ -21,7 +21,7 @@ namespace ASP.NET_MVC5.Repositories
 
         public bool Update(object instance)
         {
-            throw new NotImplementedException();
+            return SubmitChanges();
         }
 
         public bool Remove(int id)
