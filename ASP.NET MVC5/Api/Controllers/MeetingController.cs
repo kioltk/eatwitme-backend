@@ -63,7 +63,7 @@ namespace ASP.NET_MVC5.Api.Controllers
 
         [HttpPost]
         [ActionName("create")]
-        public Response Create(float latitute, float longtitude, int time, string description)
+        public Response Create(float latitude, float longtitude, int time, string description)
         {
             var meeting = new Meeting()
             {
