@@ -27,17 +27,6 @@ namespace ASP.NET_MVC5.Api.Controllers
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
             return base.IsAuthorized(actionContext);
-            if (actionContext.RequestContext.RouteData.Values.Keys.Contains("token"))
-            {
-                var token = actionContext.RequestContext.RouteData.Values["token"].ToString();
-
-                if ((token == "sallen") || (token == "wmobilas") || (token == "kioltk"))
-                {
-                    return true;
-                }
-                return false;
-            }
-            return false;    
         }
         public override void OnAuthorization(HttpActionContext actionContext)
         {

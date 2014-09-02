@@ -20,6 +20,7 @@ namespace ASP.NET_MVC5.Repositories
             {
                 context.Meetings.InsertOnSubmit(instance);
                 SubmitChanges();
+                Service.Notify.NewMeeting(null);
                 return instance.Id;
             }
             return -1;
@@ -53,7 +54,7 @@ namespace ASP.NET_MVC5.Repositories
                     context.MeetingAccepts.InsertOnSubmit(accept);
                     SubmitChanges();
 
-
+                    Service.Notify.NewAccept(accept);
                     return accept.Id;
                 }
                 catch (Exception)

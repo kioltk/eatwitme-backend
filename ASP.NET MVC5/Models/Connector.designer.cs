@@ -30,6 +30,9 @@ namespace ASP.NET_MVC5.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void Insert__MigrationHistory(__MigrationHistory instance);
+    partial void Update__MigrationHistory(__MigrationHistory instance);
+    partial void Delete__MigrationHistory(__MigrationHistory instance);
     partial void InsertMeeting(Meeting instance);
     partial void UpdateMeeting(Meeting instance);
     partial void DeleteMeeting(Meeting instance);
@@ -45,12 +48,12 @@ namespace ASP.NET_MVC5.Models
     partial void InsertAspNetUserRole(AspNetUserRole instance);
     partial void UpdateAspNetUserRole(AspNetUserRole instance);
     partial void DeleteAspNetUserRole(AspNetUserRole instance);
-    partial void InsertMeetingAccept(MeetingAccept instance);
-    partial void UpdateMeetingAccept(MeetingAccept instance);
-    partial void DeleteMeetingAccept(MeetingAccept instance);
     partial void InsertAspNetUser(AspNetUser instance);
     partial void UpdateAspNetUser(AspNetUser instance);
     partial void DeleteAspNetUser(AspNetUser instance);
+    partial void InsertMeetingAccept(MeetingAccept instance);
+    partial void UpdateMeetingAccept(MeetingAccept instance);
+    partial void DeleteMeetingAccept(MeetingAccept instance);
     #endregion
 		
 		public ConnectorDataContext() : 
@@ -81,6 +84,14 @@ namespace ASP.NET_MVC5.Models
 				base(connection, mappingSource)
 		{
 			OnCreated();
+		}
+		
+		public System.Data.Linq.Table<@__MigrationHistory> @__MigrationHistories
+		{
+			get
+			{
+				return this.GetTable<@__MigrationHistory>();
+			}
 		}
 		
 		public System.Data.Linq.Table<Meeting> Meetings
@@ -123,6 +134,14 @@ namespace ASP.NET_MVC5.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<AspNetUser> AspNetUsers
+		{
+			get
+			{
+				return this.GetTable<AspNetUser>();
+			}
+		}
+		
 		public System.Data.Linq.Table<MeetingAccept> MeetingAccepts
 		{
 			get
@@ -130,12 +149,138 @@ namespace ASP.NET_MVC5.Models
 				return this.GetTable<MeetingAccept>();
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[__MigrationHistory]")]
+	public partial class @__MigrationHistory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		public System.Data.Linq.Table<AspNetUser> AspNetUsers
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _MigrationId;
+		
+		private string _ContextKey;
+		
+		private System.Data.Linq.Binary _Model;
+		
+		private string _ProductVersion;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMigrationIdChanging(string value);
+    partial void OnMigrationIdChanged();
+    partial void OnContextKeyChanging(string value);
+    partial void OnContextKeyChanged();
+    partial void OnModelChanging(System.Data.Linq.Binary value);
+    partial void OnModelChanged();
+    partial void OnProductVersionChanging(string value);
+    partial void OnProductVersionChanged();
+    #endregion
+		
+		public @__MigrationHistory()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MigrationId", DbType="NVarChar(150) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MigrationId
 		{
 			get
 			{
-				return this.GetTable<AspNetUser>();
+				return this._MigrationId;
+			}
+			set
+			{
+				if ((this._MigrationId != value))
+				{
+					this.OnMigrationIdChanging(value);
+					this.SendPropertyChanging();
+					this._MigrationId = value;
+					this.SendPropertyChanged("MigrationId");
+					this.OnMigrationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContextKey", DbType="NVarChar(300) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ContextKey
+		{
+			get
+			{
+				return this._ContextKey;
+			}
+			set
+			{
+				if ((this._ContextKey != value))
+				{
+					this.OnContextKeyChanging(value);
+					this.SendPropertyChanging();
+					this._ContextKey = value;
+					this.SendPropertyChanged("ContextKey");
+					this.OnContextKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Model", DbType="VarBinary(MAX) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Model
+		{
+			get
+			{
+				return this._Model;
+			}
+			set
+			{
+				if ((this._Model != value))
+				{
+					this.OnModelChanging(value);
+					this.SendPropertyChanging();
+					this._Model = value;
+					this.SendPropertyChanged("Model");
+					this.OnModelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductVersion", DbType="NVarChar(32) NOT NULL", CanBeNull=false)]
+		public string ProductVersion
+		{
+			get
+			{
+				return this._ProductVersion;
+			}
+			set
+			{
+				if ((this._ProductVersion != value))
+				{
+					this.OnProductVersionChanging(value);
+					this.SendPropertyChanging();
+					this._ProductVersion = value;
+					this.SendPropertyChanged("ProductVersion");
+					this.OnProductVersionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -148,7 +293,7 @@ namespace ASP.NET_MVC5.Models
 		
 		private int _Id;
 		
-		private string _longtitude;
+		private string _longitude;
 		
 		private string _latitude;
 		
@@ -158,7 +303,7 @@ namespace ASP.NET_MVC5.Models
 		
 		private string _creator;
 		
-		private string _confirmed;
+		private string _confirmer;
 		
 		private EntitySet<MeetingAccept> _MeetingAccepts;
 		
@@ -172,8 +317,8 @@ namespace ASP.NET_MVC5.Models
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
-    partial void OnlongtitudeChanging(string value);
-    partial void OnlongtitudeChanged();
+    partial void OnlongitudeChanging(string value);
+    partial void OnlongitudeChanged();
     partial void OnlatitudeChanging(string value);
     partial void OnlatitudeChanged();
     partial void OntimeChanging(int value);
@@ -182,8 +327,8 @@ namespace ASP.NET_MVC5.Models
     partial void OndescriptionChanged();
     partial void OncreatorChanging(string value);
     partial void OncreatorChanged();
-    partial void OnconfirmedChanging(string value);
-    partial void OnconfirmedChanged();
+    partial void OnconfirmerChanging(string value);
+    partial void OnconfirmerChanged();
     #endregion
 		
 		public Meeting()
@@ -214,22 +359,22 @@ namespace ASP.NET_MVC5.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longtitude", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string longtitude
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitude", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string longitude
 		{
 			get
 			{
-				return this._longtitude;
+				return this._longitude;
 			}
 			set
 			{
-				if ((this._longtitude != value))
+				if ((this._longitude != value))
 				{
-					this.OnlongtitudeChanging(value);
+					this.OnlongitudeChanging(value);
 					this.SendPropertyChanging();
-					this._longtitude = value;
-					this.SendPropertyChanged("longtitude");
-					this.OnlongtitudeChanged();
+					this._longitude = value;
+					this.SendPropertyChanged("longitude");
+					this.OnlongitudeChanged();
 				}
 			}
 		}
@@ -318,26 +463,26 @@ namespace ASP.NET_MVC5.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_confirmed", DbType="NVarChar(128)")]
-		public string confirmed
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_confirmer", DbType="NVarChar(128)")]
+		public string confirmer
 		{
 			get
 			{
-				return this._confirmed;
+				return this._confirmer;
 			}
 			set
 			{
-				if ((this._confirmed != value))
+				if ((this._confirmer != value))
 				{
 					if (this._AspNetUser.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnconfirmedChanging(value);
+					this.OnconfirmerChanging(value);
 					this.SendPropertyChanging();
-					this._confirmed = value;
-					this.SendPropertyChanged("confirmed");
-					this.OnconfirmedChanged();
+					this._confirmer = value;
+					this.SendPropertyChanged("confirmer");
+					this.OnconfirmerChanged();
 				}
 			}
 		}
@@ -355,7 +500,7 @@ namespace ASP.NET_MVC5.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Meeting", Storage="_AspNetUser", ThisKey="confirmed", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Meeting", Storage="_AspNetUser", ThisKey="confirmer", OtherKey="Id", IsForeignKey=true)]
 		public AspNetUser AspNetUser
 		{
 			get
@@ -378,11 +523,11 @@ namespace ASP.NET_MVC5.Models
 					if ((value != null))
 					{
 						value.Meetings.Add(this);
-						this._confirmed = value.Id;
+						this._confirmer = value.Id;
 					}
 					else
 					{
-						this._confirmed = default(string);
+						this._confirmer = default(string);
 					}
 					this.SendPropertyChanged("AspNetUser");
 				}
@@ -1064,270 +1209,6 @@ namespace ASP.NET_MVC5.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MeetingAccepts")]
-	public partial class MeetingAccept : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _meetingId;
-		
-		private string _accepterId;
-		
-		private bool _confirmed;
-		
-		private string _text;
-		
-		private int _time;
-		
-		private EntityRef<Meeting> _Meeting;
-		
-		private EntityRef<AspNetUser> _AspNetUser;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnmeetingIdChanging(int value);
-    partial void OnmeetingIdChanged();
-    partial void OnaccepterIdChanging(string value);
-    partial void OnaccepterIdChanged();
-    partial void OnconfirmedChanging(bool value);
-    partial void OnconfirmedChanged();
-    partial void OntextChanging(string value);
-    partial void OntextChanged();
-    partial void OntimeChanging(int value);
-    partial void OntimeChanged();
-    #endregion
-		
-		public MeetingAccept()
-		{
-			this._Meeting = default(EntityRef<Meeting>);
-			this._AspNetUser = default(EntityRef<AspNetUser>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_meetingId", DbType="Int NOT NULL")]
-		public int meetingId
-		{
-			get
-			{
-				return this._meetingId;
-			}
-			set
-			{
-				if ((this._meetingId != value))
-				{
-					if (this._Meeting.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnmeetingIdChanging(value);
-					this.SendPropertyChanging();
-					this._meetingId = value;
-					this.SendPropertyChanged("meetingId");
-					this.OnmeetingIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_accepterId", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
-		public string accepterId
-		{
-			get
-			{
-				return this._accepterId;
-			}
-			set
-			{
-				if ((this._accepterId != value))
-				{
-					if (this._AspNetUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnaccepterIdChanging(value);
-					this.SendPropertyChanging();
-					this._accepterId = value;
-					this.SendPropertyChanged("accepterId");
-					this.OnaccepterIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_confirmed", DbType="Bit NOT NULL")]
-		public bool confirmed
-		{
-			get
-			{
-				return this._confirmed;
-			}
-			set
-			{
-				if ((this._confirmed != value))
-				{
-					this.OnconfirmedChanging(value);
-					this.SendPropertyChanging();
-					this._confirmed = value;
-					this.SendPropertyChanged("confirmed");
-					this.OnconfirmedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_text", DbType="NVarChar(MAX)")]
-		public string text
-		{
-			get
-			{
-				return this._text;
-			}
-			set
-			{
-				if ((this._text != value))
-				{
-					this.OntextChanging(value);
-					this.SendPropertyChanging();
-					this._text = value;
-					this.SendPropertyChanged("text");
-					this.OntextChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time", DbType="Int NOT NULL")]
-		public int time
-		{
-			get
-			{
-				return this._time;
-			}
-			set
-			{
-				if ((this._time != value))
-				{
-					this.OntimeChanging(value);
-					this.SendPropertyChanging();
-					this._time = value;
-					this.SendPropertyChanged("time");
-					this.OntimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Meeting_MeetingAccept", Storage="_Meeting", ThisKey="meetingId", OtherKey="Id", IsForeignKey=true)]
-		public Meeting Meeting
-		{
-			get
-			{
-				return this._Meeting.Entity;
-			}
-			set
-			{
-				Meeting previousValue = this._Meeting.Entity;
-				if (((previousValue != value) 
-							|| (this._Meeting.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Meeting.Entity = null;
-						previousValue.MeetingAccepts.Remove(this);
-					}
-					this._Meeting.Entity = value;
-					if ((value != null))
-					{
-						value.MeetingAccepts.Add(this);
-						this._meetingId = value.Id;
-					}
-					else
-					{
-						this._meetingId = default(int);
-					}
-					this.SendPropertyChanged("Meeting");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_MeetingAccept", Storage="_AspNetUser", ThisKey="accepterId", OtherKey="Id", IsForeignKey=true)]
-		public AspNetUser AspNetUser
-		{
-			get
-			{
-				return this._AspNetUser.Entity;
-			}
-			set
-			{
-				AspNetUser previousValue = this._AspNetUser.Entity;
-				if (((previousValue != value) 
-							|| (this._AspNetUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._AspNetUser.Entity = null;
-						previousValue.MeetingAccepts.Remove(this);
-					}
-					this._AspNetUser.Entity = value;
-					if ((value != null))
-					{
-						value.MeetingAccepts.Add(this);
-						this._accepterId = value.Id;
-					}
-					else
-					{
-						this._accepterId = default(string);
-					}
-					this.SendPropertyChanged("AspNetUser");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUsers")]
 	public partial class AspNetUser : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1346,7 +1227,7 @@ namespace ASP.NET_MVC5.Models
 		
 		private string _latitude;
 		
-		private string _longtitude;
+		private string _longitude;
 		
 		private string _registrationId;
 		
@@ -1378,8 +1259,8 @@ namespace ASP.NET_MVC5.Models
     partial void OnDiscriminatorChanged();
     partial void OnlatitudeChanging(string value);
     partial void OnlatitudeChanged();
-    partial void OnlongtitudeChanging(string value);
-    partial void OnlongtitudeChanged();
+    partial void OnlongitudeChanging(string value);
+    partial void OnlongitudeChanged();
     partial void OnregistrationIdChanging(string value);
     partial void OnregistrationIdChanged();
     #endregion
@@ -1515,22 +1396,22 @@ namespace ASP.NET_MVC5.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longtitude", DbType="NVarChar(50)")]
-		public string longtitude
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitude", DbType="NVarChar(50)")]
+		public string longitude
 		{
 			get
 			{
-				return this._longtitude;
+				return this._longitude;
 			}
 			set
 			{
-				if ((this._longtitude != value))
+				if ((this._longitude != value))
 				{
-					this.OnlongtitudeChanging(value);
+					this.OnlongitudeChanging(value);
 					this.SendPropertyChanging();
-					this._longtitude = value;
-					this.SendPropertyChanged("longtitude");
-					this.OnlongtitudeChanged();
+					this._longitude = value;
+					this.SendPropertyChanged("longitude");
+					this.OnlongitudeChanged();
 				}
 			}
 		}
@@ -1555,7 +1436,7 @@ namespace ASP.NET_MVC5.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Meeting", Storage="_Meetings", ThisKey="Id", OtherKey="confirmed")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Meeting", Storage="_Meetings", ThisKey="Id", OtherKey="confirmer")]
 		public EntitySet<Meeting> Meetings
 		{
 			get
@@ -1620,7 +1501,7 @@ namespace ASP.NET_MVC5.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_MeetingAccept", Storage="_MeetingAccepts", ThisKey="Id", OtherKey="accepterId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_MeetingAccept", Storage="_MeetingAccepts", ThisKey="Id", OtherKey="acceptorId")]
 		public EntitySet<MeetingAccept> MeetingAccepts
 		{
 			get
@@ -1723,6 +1604,270 @@ namespace ASP.NET_MVC5.Models
 		{
 			this.SendPropertyChanging();
 			entity.AspNetUser = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MeetingAccepts")]
+	public partial class MeetingAccept : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _meetingId;
+		
+		private string _acceptorId;
+		
+		private bool _confirmed;
+		
+		private string _message;
+		
+		private int _time;
+		
+		private EntityRef<AspNetUser> _AspNetUser;
+		
+		private EntityRef<Meeting> _Meeting;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnmeetingIdChanging(int value);
+    partial void OnmeetingIdChanged();
+    partial void OnacceptorIdChanging(string value);
+    partial void OnacceptorIdChanged();
+    partial void OnconfirmedChanging(bool value);
+    partial void OnconfirmedChanged();
+    partial void OnmessageChanging(string value);
+    partial void OnmessageChanged();
+    partial void OntimeChanging(int value);
+    partial void OntimeChanged();
+    #endregion
+		
+		public MeetingAccept()
+		{
+			this._AspNetUser = default(EntityRef<AspNetUser>);
+			this._Meeting = default(EntityRef<Meeting>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_meetingId", DbType="Int NOT NULL")]
+		public int meetingId
+		{
+			get
+			{
+				return this._meetingId;
+			}
+			set
+			{
+				if ((this._meetingId != value))
+				{
+					if (this._Meeting.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnmeetingIdChanging(value);
+					this.SendPropertyChanging();
+					this._meetingId = value;
+					this.SendPropertyChanged("meetingId");
+					this.OnmeetingIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_acceptorId", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string acceptorId
+		{
+			get
+			{
+				return this._acceptorId;
+			}
+			set
+			{
+				if ((this._acceptorId != value))
+				{
+					if (this._AspNetUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnacceptorIdChanging(value);
+					this.SendPropertyChanging();
+					this._acceptorId = value;
+					this.SendPropertyChanged("acceptorId");
+					this.OnacceptorIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_confirmed", DbType="Bit NOT NULL")]
+		public bool confirmed
+		{
+			get
+			{
+				return this._confirmed;
+			}
+			set
+			{
+				if ((this._confirmed != value))
+				{
+					this.OnconfirmedChanging(value);
+					this.SendPropertyChanging();
+					this._confirmed = value;
+					this.SendPropertyChanged("confirmed");
+					this.OnconfirmedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="NVarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this.OnmessageChanging(value);
+					this.SendPropertyChanging();
+					this._message = value;
+					this.SendPropertyChanged("message");
+					this.OnmessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time", DbType="Int NOT NULL")]
+		public int time
+		{
+			get
+			{
+				return this._time;
+			}
+			set
+			{
+				if ((this._time != value))
+				{
+					this.OntimeChanging(value);
+					this.SendPropertyChanging();
+					this._time = value;
+					this.SendPropertyChanged("time");
+					this.OntimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_MeetingAccept", Storage="_AspNetUser", ThisKey="acceptorId", OtherKey="Id", IsForeignKey=true)]
+		public AspNetUser AspNetUser
+		{
+			get
+			{
+				return this._AspNetUser.Entity;
+			}
+			set
+			{
+				AspNetUser previousValue = this._AspNetUser.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetUser.Entity = null;
+						previousValue.MeetingAccepts.Remove(this);
+					}
+					this._AspNetUser.Entity = value;
+					if ((value != null))
+					{
+						value.MeetingAccepts.Add(this);
+						this._acceptorId = value.Id;
+					}
+					else
+					{
+						this._acceptorId = default(string);
+					}
+					this.SendPropertyChanged("AspNetUser");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Meeting_MeetingAccept", Storage="_Meeting", ThisKey="meetingId", OtherKey="Id", IsForeignKey=true)]
+		public Meeting Meeting
+		{
+			get
+			{
+				return this._Meeting.Entity;
+			}
+			set
+			{
+				Meeting previousValue = this._Meeting.Entity;
+				if (((previousValue != value) 
+							|| (this._Meeting.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Meeting.Entity = null;
+						previousValue.MeetingAccepts.Remove(this);
+					}
+					this._Meeting.Entity = value;
+					if ((value != null))
+					{
+						value.MeetingAccepts.Add(this);
+						this._meetingId = value.Id;
+					}
+					else
+					{
+						this._meetingId = default(int);
+					}
+					this.SendPropertyChanged("Meeting");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

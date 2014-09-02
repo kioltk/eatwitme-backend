@@ -7,10 +7,11 @@ namespace ASP.NET_MVC5.Api.Models
 {
     public class MeetingAcceptApiModel
     {
+        public string id { get; set; }
         public string meetingId { get; set; }
-        public string accepterId { get; set; }
-        public string text { get; set; }
+        public string acceptorId { get; set; }
+        public string message { get; set; }
         public int time { get; set; }
-        //public bool confirmed { get; set; }
+        public bool confirmed { get; set; }
     }
 }

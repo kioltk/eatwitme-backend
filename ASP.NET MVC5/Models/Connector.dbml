@@ -1,16 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="aspnet-ASP.NET_MVC5-20140302121355" Class="ConnectorDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\aspnet-ASP.NET_MVC5-20140302121355.mdf;Initial Catalog=aspnet-ASP.NET_MVC5-20140302121355;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDb)\v11.0;AttachDbFilename=D:\EathWithMe\BackEnd\Database\aspnet-ASP.NET_MVC5-20140302121355.mdf;Initial Catalog=aspnet-ASP.NET_MVC5-20140302121355;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[__MigrationHistory]" Member="__MigrationHistories">
+    <Type Name="__MigrationHistory">
+      <Column Name="MigrationId" Type="System.String" DbType="NVarChar(150) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ContextKey" Type="System.String" DbType="NVarChar(300) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Model" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ProductVersion" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.Meetings" Member="Meetings">
     <Type Name="Meeting">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="longtitude" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="longitude" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="latitude" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="time" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="creator" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="confirmed" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="confirmer" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
       <Association Name="Meeting_MeetingAccept" Member="MeetingAccepts" ThisKey="Id" OtherKey="meetingId" Type="MeetingAccept" />
-      <Association Name="AspNetUser_Meeting" Member="AspNetUser" ThisKey="confirmed" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="AspNetUser_Meeting" Member="AspNetUser" ThisKey="confirmer" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
       <Association Name="AspNetUser_Meeting1" Member="AspNetUser1" ThisKey="creator" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
     </Type>
   </Table>
@@ -46,18 +54,6 @@
       <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.MeetingAccepts" Member="MeetingAccepts">
-    <Type Name="MeetingAccept">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="meetingId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="accepterId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="confirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="text" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="time" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Meeting_MeetingAccept" Member="Meeting" ThisKey="meetingId" OtherKey="Id" Type="Meeting" IsForeignKey="true" />
-      <Association Name="AspNetUser_MeetingAccept" Member="AspNetUser" ThisKey="accepterId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
     <Type Name="AspNetUser">
       <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -66,14 +62,26 @@
       <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Discriminator" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="latitude" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="longtitude" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="longitude" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="registrationId" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Association Name="AspNetUser_Meeting" Member="Meetings" ThisKey="Id" OtherKey="confirmed" Type="Meeting" />
+      <Association Name="AspNetUser_Meeting" Member="Meetings" ThisKey="Id" OtherKey="confirmer" Type="Meeting" />
       <Association Name="AspNetUser_Meeting1" Member="Meetings1" ThisKey="Id" OtherKey="creator" Type="Meeting" />
       <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="User_Id" Type="AspNetUserClaim" />
       <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
       <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
-      <Association Name="AspNetUser_MeetingAccept" Member="MeetingAccepts" ThisKey="Id" OtherKey="accepterId" Type="MeetingAccept" />
+      <Association Name="AspNetUser_MeetingAccept" Member="MeetingAccepts" ThisKey="Id" OtherKey="acceptorId" Type="MeetingAccept" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MeetingAccepts" Member="MeetingAccepts">
+    <Type Name="MeetingAccept">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="meetingId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="acceptorId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="confirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="message" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="time" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUser_MeetingAccept" Member="AspNetUser" ThisKey="acceptorId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="Meeting_MeetingAccept" Member="Meeting" ThisKey="meetingId" OtherKey="Id" Type="Meeting" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -69,7 +69,7 @@ namespace ASP.NET_MVC5.Controllers
             {
                 throw new Exception();
             }
-            if (meeting.confirmed != null)
+            if (meeting.confirmer != null)
             {
                 throw new Exception();
             }
@@ -101,7 +101,7 @@ namespace ASP.NET_MVC5.Controllers
 
             if (meeting.isOwner)
             {
-                meeting.confirmed = meetingAccept.accepterId;
+                meeting.confirmer = meetingAccept.acceptorId;
                 meetingRep.Update(meeting);
 
             }
@@ -116,6 +116,7 @@ namespace ASP.NET_MVC5.Controllers
         [AllowAnonymous]
         public ActionResult History(string userid="")
         {
+
             return View();
         }
     }

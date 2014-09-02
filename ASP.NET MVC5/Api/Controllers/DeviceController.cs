@@ -68,7 +68,7 @@ namespace ASP.NET_MVC5.Api.Controllers
             {
                 return new InternalError("No such user");
             }
-            currentUser.longtitude = null;
+            currentUser.longitude = null;
             currentUser.latitude = null;
             if (userRep.Update(currentUser))
                 return Response(true);
@@ -84,7 +84,7 @@ namespace ASP.NET_MVC5.Api.Controllers
             {
                 return new InternalError("No such user");
             }
-            currentUser.longtitude = longtitude;
+            currentUser.longitude = longtitude;
             currentUser.latitude = latitude;
             if (userRep.Update(currentUser))
                 return Response(true);

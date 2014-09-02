@@ -63,12 +63,12 @@ namespace ASP.NET_MVC5.Api.Controllers
 
         [HttpPost]
         [ActionName("create")]
-        public Response Create(float latitude, float longtitude, int time, string description)
+        public Response Create(float latitude, float longitude, int time, string description)
         {
             var meeting = new Meeting()
             {
-                latitude = latitute.ToString(),
-                longtitude = longtitude.ToString(),
+                latitude = latitude.ToString(),
+                longitude = longitude.ToString(),
                 time = time,
                 description = description
             };
@@ -96,9 +96,9 @@ namespace ASP.NET_MVC5.Api.Controllers
 
         [HttpPost]
         [ActionName("accept")]
-        public Response Accept(int id, string text)
+        public Response Accept(int id, string message)
         {
-            var accept = new MeetingAccept() { meetingId = id, accepterId = GetUserId(), text = text };
+            var accept = new MeetingAccept() { meetingId = id, acceptorId = GetUserId(), message = message };
             var meetingRep = new MeetingRepository();
             var meeting = meetingRep.Meetings.FirstOrDefault(x => x.Id == accept.meetingId);
             if (meeting == null)
@@ -106,15 +106,15 @@ namespace ASP.NET_MVC5.Api.Controllers
                 return new BadRequestError("No such meeting");
             }
             meeting.checkPermissions(GetUserId());
-            if (!meeting.isOwner)
+            if (meeting.isOwner)
             {
-                return new UnauthorizedError("Not owner");
+                return new UnauthorizedError("Not for owner");
             }
             if (meeting.isAccepter)
             {
                 return new BadRequestError("Already accepted");
             }
-            if (meeting.confirmed != null)
+            if (meeting.confirmer != null)
             {
                 return new BadRequestError("Already confirmed");
             }
@@ -152,7 +152,7 @@ namespace ASP.NET_MVC5.Api.Controllers
 
             if (meeting.isOwner)
             {
-                meeting.confirmed = meetingAccept.accepterId;
+                meeting.confirmer = meetingAccept.acceptorId;
                 meetingRep.Update(meeting);
             }
             else

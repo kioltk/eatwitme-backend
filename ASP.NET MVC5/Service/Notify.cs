@@ -15,6 +15,10 @@ namespace ASP.NET_MVC5.Service
         private static string GoogleAppID = "AIzaSyAqLQopxscmV8MLvqoPvCOlIKckyOoBo5E";
         public static String SendCommandToPhone(String message, string registrationid)
         {
+            if (registrationid == null)
+            {
+                return "Regid is empty";
+            }
             String DeviceID = "";
 
             DeviceID = registrationid;
@@ -63,6 +67,7 @@ namespace ASP.NET_MVC5.Service
         {
             var owner = accept.Meeting.AspNetUser;
             SendCommandToPhone("new accept", owner.registrationId);
+            //NewMeeting(null);
         }
         
         public static void Confirm(Models.MeetingAccept meetingAccept)
@@ -70,6 +75,7 @@ namespace ASP.NET_MVC5.Service
 
             var accepter = meetingAccept.AspNetUser;
             SendCommandToPhone("confirmed", accepter.registrationId);
+            //NewMeeting(null);
         }
     }
 }

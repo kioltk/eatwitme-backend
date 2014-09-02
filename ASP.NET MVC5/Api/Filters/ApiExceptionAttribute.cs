@@ -13,13 +13,9 @@ namespace ASP.NET_MVC5.App_Start
     {
         public override void OnException(HttpActionExecutedContext context)
         {
+            var exp = context.Exception;
+            context.Response = context.Request.CreateResponse(HttpStatusCode.OK, new InternalError(exp.Message + "\n\r\n\br" + exp.StackTrace));
             
-            if (context.Exception is SystemException)
-            {
-                context.Response = context.Request.CreateResponse(HttpStatusCode.OK, new InternalError());
-                return;
-            }
-            context.Response = context.Request.CreateResponse(HttpStatusCode.OK, new InternalError());
             
         }
     }
