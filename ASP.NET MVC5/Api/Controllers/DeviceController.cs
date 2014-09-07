@@ -29,6 +29,7 @@ namespace ASP.NET_MVC5.Api.Controllers
             }
         }
 
+
         [HttpPost]
         public Response Register(string registrationid)
         {
@@ -76,7 +77,7 @@ namespace ASP.NET_MVC5.Api.Controllers
 
         }
         [HttpPost]
-        public Response CheckLocation(string longtitude, string latitude)
+        public Response CheckLocation(string longitude, string latitude)
         {
             var userRep = new UserRepository();
             var currentUser = userRep.AspNetUsers.FirstOrDefault(x => x.Id == GetUserId());
@@ -84,7 +85,7 @@ namespace ASP.NET_MVC5.Api.Controllers
             {
                 return new InternalError("No such user");
             }
-            currentUser.longitude = longtitude;
+            currentUser.longitude = longitude;
             currentUser.latitude = latitude;
             if (userRep.Update(currentUser))
                 return Response(true);

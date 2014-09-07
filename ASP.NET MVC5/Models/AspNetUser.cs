@@ -7,7 +7,10 @@ namespace ASP.NET_MVC5.Models
 {
     public partial class AspNetUser
     {
-        public string Role { get { return AspNetUserRoles.First().AspNetRole.Name; } }
+        public string Role { get {
+            if(! AspNetUserRoles.Any())
+                return null;
+            return AspNetUserRoles.First().AspNetRole.Name; } }
         
     }
 }

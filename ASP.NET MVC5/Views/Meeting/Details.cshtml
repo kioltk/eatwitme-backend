@@ -16,11 +16,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.longtitude)
+            @Html.DisplayNameFor(model => model.longitude)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.longtitude)
+            @Html.DisplayFor(model => model.longitude)
         </dd>
 
         <dt>
@@ -56,19 +56,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.confirmed)
+            @Html.DisplayNameFor(model => model.confirmer)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.confirmed)
+            @Html.DisplayFor(model => model.confirmer)
         </dd>
 
-    </dl>
-    <img src="http://maps.googleapis.com/maps/api/staticmap?zoom=5&size=400x200&maptype=roadmap
-&markers=color:red%7Clabel:Here%7C
-         @Model.latitude,
-         @Model.longtitude
-         " width="400" height="200" />
+    </dl>    
+    @ASP.NET_MVC5.Helper.Html.StaticMapImage(Model.longitude, Model.latitude, 400, 200, 5, "red", "Here")
     
     @if (User.Identity.IsAuthenticated)
     {
@@ -99,7 +95,7 @@
             {
                 <div class="dl-horizontal">
                     
-                    <p>@accept.Id<span /> @accept.AspNetUser.UserName<span /> @accept.text  <button onclick="confirm(@accept.Id)">Confirm this</button></p>
+                    <p>@accept.Id<span /> @accept.AspNetUser.UserName<span /> @accept.message  <button onclick="confirm(@accept.Id)">Confirm this</button></p>
                     
                 </div>
             }
@@ -108,7 +104,7 @@
         {
             if (Model.isAccepter)
             {
-                <p>You wrote: @Model.CurrentUserAccept.text</p>
+                <p>You wrote: @Model.CurrentUserAccept.message</p>
             }
             else
             {

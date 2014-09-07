@@ -54,5 +54,12 @@ namespace ASP.NET_MVC5.Controllers
             ViewBag.Message += " \r\n " + Session.SessionID;
             return View();
         }
+
+        public ActionResult PushThemAll()
+        {
+
+            ViewBag.Pushed = Service.Notify.PushThemAll();
+            return View();
+        }
     }
 }

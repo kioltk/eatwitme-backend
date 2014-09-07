@@ -21,6 +21,11 @@ namespace ASP.NET_MVC5.Controllers
         {
             UserRepository rep = new UserRepository();
             var users = rep.AspNetUsers;
+            
+            if (id == null)
+            {
+                return View(users.First());
+            }
             return View(users.First(x=>x.Id==id));
         }
     }

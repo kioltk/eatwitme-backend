@@ -230,6 +230,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MeetingController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Helper\Html.cs" />
     <Compile Include="Mappers\CommonMapper.cs" />
     <Compile Include="Mappers\IMapper.cs" />
     <Compile Include="Models\Connector.designer.cs">
@@ -238,6 +239,7 @@
       <DependentUpon>Connector.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\Meeting.cs" />
+    <Compile Include="Models\MeetingAccept.cs" />
     <Compile Include="Models\MeetingViewModel.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\MeetingRepository.cs" />
@@ -366,6 +368,7 @@
     <Content Include="Views\Meeting\Details.cshtml" />
     <Content Include="Views\Meeting\Accept.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Home\PushThemAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

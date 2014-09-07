@@ -30,8 +30,8 @@ namespace ASP.NET_MVC5.Service
             tRequest.Headers.Add(string.Format("Authorization: key={0}", GoogleAppID));
 
             String collaspeKey = Guid.NewGuid().ToString("n");
-            //String postData=string.Format("registration_id={0}&data.payload={1}&collapse_key={2}", DeviceID, "Pickup Message", collaspeKey);
-            String postData = string.Format("registration_id={0}&data.payload={1}&collapse_key={2}", DeviceID, message, collaspeKey);
+            String postData=string.Format("registration_id={0}&data.payload={1}&collapse_key={2}", DeviceID, "Pickup Message", collaspeKey);
+            
 
             Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             tRequest.ContentLength = byteArray.Length;
@@ -53,19 +53,79 @@ namespace ASP.NET_MVC5.Service
             tResponse.Close();
             return sResponseFromServer;
         }
+        public static String SendCommandToPhone(String message, List<String> registrationIds)
+        {
+
+            if (!registrationIds.Any())
+            {
+                return "Regid is empty";
+            }
+
+            String regIds = "";
+            regIds += "\"" + registrationIds[0] + "\"";
+            for (int i = 1; i < registrationIds.Count(); i++)
+            {
+                regIds += ",\"" + registrationIds[i]+"\"";
+            }
+            regIds = string.Join("\",\"", registrationIds);
+
+            WebRequest tRequest;
+            tRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
+            tRequest.Method = "post";
+            tRequest.ContentType = "application/json";
+            tRequest.Headers.Add(string.Format("Authorization: key={0}", GoogleAppID));
+
+            String collaspeKey = Guid.NewGuid().ToString("n");
+            String postData
+                = "";
+            postData = "{\""+
+                "collapse_key\":\"score_update\","+
+                "\"time_to_live\":108,"+
+                "\"delay_while_idle\":true,"+
+                "\"data\":"+
+                " { \"json\" : " + 
+                    "\"" + message + "\""+
+                    "},\"registration_ids\":[\"" + regIds + "\"]}";
+            Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            tRequest.ContentLength = byteArray.Length;
+
+            Stream dataStream = tRequest.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+
+            WebResponse tResponse = tRequest.GetResponse();
+
+            dataStream = tResponse.GetResponseStream();
+
+            StreamReader tReader = new StreamReader(dataStream);
+
+            String sResponseFromServer = tReader.ReadToEnd();
+            // todo: Иногда возвращается новый Regid.
+            tReader.Close();
+            dataStream.Close();
+            tResponse.Close();
+            return sResponseFromServer;
+        }
+
+        public static String PushThemAll()
+        {
+            var usersRep = new UserRepository();
+            var seekers = usersRep.AspNetUsers.Where(x => x.registrationId != null);
+            return SendCommandToPhone("Test push", seekers.Select(x => x.registrationId).ToList());
+
+        }
 
         public static void NewMeeting(Models.Meeting meeting)
         {
             var usersRep = new UserRepository();
             var seekers = usersRep.AspNetUsers.Where(x => x.registrationId != null);
-            foreach(var seeker in seekers){
-                SendCommandToPhone("new meeting", seeker.registrationId);
-            }
+                SendCommandToPhone("new meeting", seekers.Select(x=>x.registrationId).ToList());
+            
         }
 
         public static void NewAccept(Models.MeetingAccept accept)
         {
-            var owner = accept.Meeting.AspNetUser;
+            var owner = accept.Meeting.Owner;
             SendCommandToPhone("new accept", owner.registrationId);
             //NewMeeting(null);
         }
@@ -73,7 +133,7 @@ namespace ASP.NET_MVC5.Service
         public static void Confirm(Models.MeetingAccept meetingAccept)
         {
 
-            var accepter = meetingAccept.AspNetUser;
+            var accepter = meetingAccept.Acceptor;
             SendCommandToPhone("confirmed", accepter.registrationId);
             //NewMeeting(null);
         }

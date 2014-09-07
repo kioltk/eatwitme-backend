@@ -14,7 +14,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.longtitude)
+            @Html.DisplayNameFor(model => model.longitude)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.latitude)
@@ -29,7 +29,7 @@
             @Html.DisplayNameFor(model => model.creator)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.confirmed)
+            @Html.DisplayNameFor(model => model.confirmer)
         </th>
         <th></th>
     </tr>
@@ -37,7 +37,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.longtitude)
+            @Html.DisplayFor(modelItem => item.longitude)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.latitude)
@@ -52,7 +52,7 @@
             @Html.DisplayFor(modelItem => item.creator)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.confirmed)
+            @Html.DisplayFor(modelItem => item.confirmer)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

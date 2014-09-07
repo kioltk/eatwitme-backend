@@ -18,10 +18,13 @@
             @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.longtitude)
+            @Html.DisplayNameFor(model => model.longitude)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.registrationId)
         </th>
         
         <th></th>
@@ -39,10 +42,13 @@
             @Html.DisplayFor(modelItem => item.Id)
         </td>
         <th>
-            @Html.DisplayFor(modelItem => item.longtitude)
+            @Html.DisplayFor(modelItem => item.longitude)
         </th>
         <th>
             @Html.DisplayFor(modelItem => item.latitude)
+        </th>
+        <th>
+            @Html.DisplayFor(modelItem => item.registrationId)
         </th>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

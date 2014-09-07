@@ -48,19 +48,13 @@ namespace ASP.NET_MVC5.Repositories
 
             if (accept.Id == 0)
             {
-                try
-                {
 
                     context.MeetingAccepts.InsertOnSubmit(accept);
                     SubmitChanges();
 
                     Service.Notify.NewAccept(accept);
                     return accept.Id;
-                }
-                catch (Exception)
-                {
-
-                }
+             
             }
             return -1;
         }
