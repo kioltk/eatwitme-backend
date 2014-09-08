@@ -54,12 +54,47 @@ namespace ASP.NET_MVC5.Api.Controllers
         [AllowAnonymous]
         [HttpGet]
         [ActionName("list")]
-        public Response List()
+        public Response List(bool? confirmed=null)
         {
             var meetingRep = new MeetingRepository();
-            var meetings = CommonMapper.Map(meetingRep.Meetings);
-            return Response(meetings);
+            IQueryable<Meeting> meetings = null;
+            if (!confirmed.HasValue)
+                meetings = meetingRep.Meetings;
+            else
+            {
+                if (confirmed.Value)
+                {
+                    meetings = meetingRep.Meetings.Where(x => x.confirmer != null);
+                }
+                else
+                {
+                    meetings = meetingRep.Meetings.Where(x => x.confirmer == null);
+                }
+            }
+            var meetingsResponse = CommonMapper.Map(meetings);
+            return Response(meetingsResponse);
         }
+
+        [HttpGet]
+        [ActionName("history")]
+        public Response History()
+        {
+
+            var meetingRep = new MeetingRepository();
+            var meetings = meetingRep.Meetings.Where(
+                    meeting =>
+                        meeting.creator == GetUserId()
+                    || meeting.confirmer == GetUserId()
+                    || meeting.MeetingAccepts.Any(accept => accept.acceptorId == GetUserId())
+                    );
+            foreach (var meeting in meetings)
+            {
+                meeting.checkPermissions(GetUserId());
+            }
+            var meetingsResponse = CommonMapper.Map(meetings);
+            return Response(meetingsResponse);
+        }
+
 
         [HttpPost]
         [ActionName("create")]
@@ -110,7 +145,7 @@ namespace ASP.NET_MVC5.Api.Controllers
             {
                 return new UnauthorizedError("Not for owner");
             }
-            if (meeting.isAccepter)
+            if (meeting.IsAccepter)
             {
                 return new BadRequestError("Already accepted");
             }

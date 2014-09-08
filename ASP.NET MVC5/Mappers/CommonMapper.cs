@@ -33,11 +33,51 @@ namespace ASP.NET_MVC5.Mappers
 
         public static MeetingApiModel Map(Meeting model)
         {
-            return (MeetingApiModel)new CommonMapper().Map(model, typeof(Meeting), typeof(MeetingApiModel));
+            return new MeetingApiModel()
+            {
+                id = model.Id.ToString(),
+                description = model.description,
+                latitude = model.latitude,
+                longitude = model.longitude,
+                time = model.time,
+                owner = new UserApiModel()
+                {
+                    id = model.Owner.Id,
+                    username = model.Owner.UserName,
+                    photo = model.Owner.photo
+                },
+                accept = model.IsAccepter? new MeetingAcceptApiModel(){
+                    confirmed = model.CurrentUserAccept.confirmed,
+                    id = model.CurrentUserAccept.Id.ToString(),
+                    meetingId = model.CurrentUserAccept.meetingId.ToString(),
+                    message = model.CurrentUserAccept.message,
+                    time = model.CurrentUserAccept.time
+                }: null,
+                acceptsCount = model.MeetingAccepts.Count,
+                confirmer = model.confirmer == null ? null : new UserApiModel()
+                {
+                    id = model.Confirmer.Id,
+                    username = model.Confirmer.UserName,
+                    photo = model.Confirmer.photo
+                }
+            };
         }
         public static MeetingAcceptApiModel Map(MeetingAccept accept)
         {
-            return (MeetingAcceptApiModel) new CommonMapper().Map(accept, typeof(MeetingAccept), typeof(MeetingAcceptApiModel));
+            return new MeetingAcceptApiModel()
+            {
+                id = accept.Id.ToString(),
+                acceptor = new UserApiModel()
+                {
+                    id = accept.AspNetUser.Id,
+                    username = accept.AspNetUser.UserName,
+                    photo = accept.AspNetUser.photo
+                },
+                confirmed = accept.confirmed,
+                meetingId = accept.meetingId.ToString(),
+                message = accept.message,
+                time = accept.time
+            };
         }
         public static UserApiModel Map(AspNetUser user)
         {

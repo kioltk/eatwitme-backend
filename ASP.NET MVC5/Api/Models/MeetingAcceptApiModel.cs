@@ -9,7 +9,7 @@ namespace ASP.NET_MVC5.Api.Models
     {
         public string id { get; set; }
         public string meetingId { get; set; }
-        public string acceptorId { get; set; }
+        public UserApiModel acceptor { get; set; }
         public string message { get; set; }
         public int time { get; set; }
         public bool confirmed { get; set; }

@@ -9,14 +9,8 @@ namespace ASP.NET_MVC5.Api.Models
     {
         public string id { get; set; }
         public string username { get; set; }
-        public string photo
-        {
-            get
-            {
-                return "http://cs616230.vk.me/v616230567/151af/cP4wx9MZT-w.jpg";
-            }
-        }
+        public string photo { get; set; }
         public string latitude { get; set; }
-        public string longtitude { get; set; }
+        public string longitude { get; set; }
     }
 }

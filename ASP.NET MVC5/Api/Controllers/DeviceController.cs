@@ -20,7 +20,7 @@ namespace ASP.NET_MVC5.Api.Controllers
         {
             try
             {
-                var result = Service.Notify.SendCommandToPhone(message, registrationid);
+                var result = Service.Notify.SendCommandToPhone(message,"notify", registrationid);
                 return Response(new { result = true, message = result });
             }
             catch (Exception exp)

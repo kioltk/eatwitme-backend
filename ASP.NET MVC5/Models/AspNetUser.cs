@@ -11,6 +11,7 @@ namespace ASP.NET_MVC5.Models
             if(! AspNetUserRoles.Any())
                 return null;
             return AspNetUserRoles.First().AspNetRole.Name; } }
-        
+
+
     }
 }

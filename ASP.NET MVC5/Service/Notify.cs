@@ -13,7 +13,7 @@ namespace ASP.NET_MVC5.Service
     public class Notify
     {
         private static string GoogleAppID = "AIzaSyAqLQopxscmV8MLvqoPvCOlIKckyOoBo5E";
-        public static String SendCommandToPhone(String message, string registrationid)
+        public static String SendCommandToPhone(String message,String key, string registrationid)
         {
             if (registrationid == null)
             {
@@ -29,8 +29,8 @@ namespace ASP.NET_MVC5.Service
             tRequest.ContentType = "application/x-www-form-urlencoded";
             tRequest.Headers.Add(string.Format("Authorization: key={0}", GoogleAppID));
 
-            String collaspeKey = Guid.NewGuid().ToString("n");
-            String postData=string.Format("registration_id={0}&data.payload={1}&collapse_key={2}", DeviceID, "Pickup Message", collaspeKey);
+            //String collaspeKey = Guid.NewGuid().ToString("n");
+            String postData=string.Format("registration_id={0}&data.payload={1}&collapse_key={2}", DeviceID, message, key);
             
 
             Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
@@ -53,7 +53,7 @@ namespace ASP.NET_MVC5.Service
             tResponse.Close();
             return sResponseFromServer;
         }
-        public static String SendCommandToPhone(String message, List<String> registrationIds)
+        public static String SendCommandToPhone(String message,String key, List<String> registrationIds)
         {
 
             if (!registrationIds.Any())
@@ -79,7 +79,7 @@ namespace ASP.NET_MVC5.Service
             String postData
                 = "";
             postData = "{\""+
-                "collapse_key\":\"score_update\","+
+                "collapse_key\":\""+key+"\","+
                 "\"time_to_live\":108,"+
                 "\"delay_while_idle\":true,"+
                 "\"data\":"+
@@ -111,7 +111,7 @@ namespace ASP.NET_MVC5.Service
         {
             var usersRep = new UserRepository();
             var seekers = usersRep.AspNetUsers.Where(x => x.registrationId != null);
-            return SendCommandToPhone("Test push", seekers.Select(x => x.registrationId).ToList());
+            return SendCommandToPhone("{ }","test", seekers.Select(x => x.registrationId).ToList());
 
         }
 
@@ -119,14 +119,14 @@ namespace ASP.NET_MVC5.Service
         {
             var usersRep = new UserRepository();
             var seekers = usersRep.AspNetUsers.Where(x => x.registrationId != null);
-                SendCommandToPhone("new meeting", seekers.Select(x=>x.registrationId).ToList());
+                SendCommandToPhone("{ }","meeting", seekers.Select(x=>x.registrationId).ToList());
             
         }
 
         public static void NewAccept(Models.MeetingAccept accept)
         {
             var owner = accept.Meeting.Owner;
-            SendCommandToPhone("new accept", owner.registrationId);
+            SendCommandToPhone("{ }","accept", owner.registrationId);
             //NewMeeting(null);
         }
         
@@ -134,7 +134,7 @@ namespace ASP.NET_MVC5.Service
         {
 
             var accepter = meetingAccept.Acceptor;
-            SendCommandToPhone("confirmed", accepter.registrationId);
+            SendCommandToPhone("{ }","confirm", accepter.registrationId);
             //NewMeeting(null);
         }
     }
