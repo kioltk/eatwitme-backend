@@ -84,7 +84,7 @@ namespace ASP.NET_MVC5.Service
                 "\"delay_while_idle\":true,"+
                 "\"data\":"+
                 " { \"json\" : " + 
-                    "\"" + message + "\""+
+                    "" + message + ""+
                     "},\"registration_ids\":[\"" + regIds + "\"]}";
             Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             tRequest.ContentLength = byteArray.Length;
@@ -111,7 +111,7 @@ namespace ASP.NET_MVC5.Service
         {
             var usersRep = new UserRepository();
             var seekers = usersRep.AspNetUsers.Where(x => x.registrationId != null);
-            return SendCommandToPhone("{ }","test", seekers.Select(x => x.registrationId).ToList());
+            return SendCommandToPhone("\"#НОВЫЙТИПБИЗНЕСА#МОТИВАЦИЯ#ЗОЛОТО#ЗАРАБОТОКВИНТЕРНЕТЕ\"", "ЗДЕСЬ МОГЛА БЫТЬ ВАША РЕКЛАМА", seekers.Select(x => x.registrationId).ToList());
 
         }
 
@@ -119,14 +119,14 @@ namespace ASP.NET_MVC5.Service
         {
             var usersRep = new UserRepository();
             var seekers = usersRep.AspNetUsers.Where(x => x.registrationId != null);
-                SendCommandToPhone("{ }","meeting", seekers.Select(x=>x.registrationId).ToList());
+            SendCommandToPhone("{ \"description\":\""+meeting.description+"\", \"id\":\""+meeting.Id+"\" }","meeting", seekers.Select(x=>x.registrationId).ToList());
             
         }
 
         public static void NewAccept(Models.MeetingAccept accept)
         {
             var owner = accept.Meeting.Owner;
-            SendCommandToPhone("{ }","accept", owner.registrationId);
+            SendCommandToPhone("{ \"meetingId\":\""+accept.meetingId+"\", \"id\":\""+accept.Id+"\", \"message\":\""+accept.message+"\" }","accept", owner.registrationId);
             //NewMeeting(null);
         }
         
@@ -134,7 +134,7 @@ namespace ASP.NET_MVC5.Service
         {
 
             var accepter = meetingAccept.Acceptor;
-            SendCommandToPhone("{ }","confirm", accepter.registrationId);
+            SendCommandToPhone("{ \"meetingId\":\""+meetingAccept.meetingId+"\" }","confirm", accepter.registrationId);
             //NewMeeting(null);
         }
     }

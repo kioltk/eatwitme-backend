@@ -20,7 +20,7 @@ namespace ASP.NET_MVC5.Repositories
             {
                 context.Meetings.InsertOnSubmit(instance);
                 SubmitChanges();
-                Service.Notify.NewMeeting(null);
+                Service.Notify.NewMeeting(instance);
                 return instance.Id;
             }
             return -1;

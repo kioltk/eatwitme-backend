@@ -19,5 +19,6 @@ namespace ASP.NET_MVC5
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
     }
 }

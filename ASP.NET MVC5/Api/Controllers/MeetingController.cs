@@ -158,7 +158,6 @@ namespace ASP.NET_MVC5.Api.Controllers
             int acceptId = meetingRep.Create(accept);
             if (acceptId > 0)
             {
-                Notify.NewAccept(accept);
                 return Response(acceptId);
             }
 
