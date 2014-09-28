@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -54,7 +57,21 @@ namespace ASP.NET_MVC5.Controllers
             ViewBag.Message += " \r\n " + Session.SessionID;
             return View();
         }
+        public ActionResult PingGator()
+        {
+            WebRequest webRequest = WebRequest.Create("http://eatwithme.agcy.co.il/main");
+            // Get the response so that we don't leave this request hanging around
+            WebResponse response = webRequest.GetResponse();
+            using (Stream stream = response.GetResponseStream())
+            {
+                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                String responseString = reader.ReadToEnd();
+                ViewBag.Message += "\n" + responseString;
+            }
+            response.Close();
 
+            return View();
+        }
         public ActionResult PushThemAll()
         {
 

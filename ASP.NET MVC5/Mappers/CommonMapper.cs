@@ -40,26 +40,10 @@ namespace ASP.NET_MVC5.Mappers
                 latitude = model.latitude,
                 longitude = model.longitude,
                 time = model.time,
-                owner = new UserApiModel()
-                {
-                    id = model.Owner.Id,
-                    username = model.Owner.UserName,
-                    photo = model.Owner.photo
-                },
-                accept = model.IsAccepter? new MeetingAcceptApiModel(){
-                    confirmed = model.CurrentUserAccept.confirmed,
-                    id = model.CurrentUserAccept.Id.ToString(),
-                    meetingId = model.CurrentUserAccept.meetingId.ToString(),
-                    message = model.CurrentUserAccept.message,
-                    time = model.CurrentUserAccept.time
-                }: null,
+                owner = Map(model.Owner),
+                accept = model.IsAccepter? Map(model.CurrentUserAccept): null,
                 acceptsCount = model.MeetingAccepts.Count,
-                confirmer = model.confirmer == null ? null : new UserApiModel()
-                {
-                    id = model.Confirmer.Id,
-                    username = model.Confirmer.UserName,
-                    photo = model.Confirmer.photo
-                }
+                confirmer = model.confirmer == null ? null : Map(model.Confirmer)
             };
         }
         public static MeetingAcceptApiModel Map(MeetingAccept accept)
@@ -81,6 +65,12 @@ namespace ASP.NET_MVC5.Mappers
         }
         public static UserApiModel Map(AspNetUser user)
         {
+            return new UserApiModel() { 
+            id = user.Id,
+            photo = "https://pp.vk.me/c412226/v412226567/3259/6oLwMrRQC6A.jpg", //user.photo,
+            username = user.UserName,
+            meetingsCount = user.getMeetingsCount()
+            };
             return (UserApiModel) new CommonMapper().Map(user, typeof(AspNetUser), typeof(UserApiModel));
         }
         public static UserApiModel Map(ApplicationUser user)

@@ -118,7 +118,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MsieJavaScriptEngine.1.4.4\lib\net40\MsieJavaScriptEngine.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -195,9 +195,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -225,7 +222,7 @@
     <Compile Include="Api\Controllers\HomeController.cs" />
     <Compile Include="Api\Errors\UnauthorizedError.cs" />
     <Compile Include="Api\Models\MeetingAcceptApiModel.cs" />
-    <Compile Include="Api\Models\MeetingApi.cs" />
+    <Compile Include="Api\Models\MeetingApiModel.cs" />
     <Compile Include="Api\Models\Response.cs" />
     <Compile Include="Api\Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Api\Models\UserApiModel.cs" />
@@ -374,6 +371,7 @@
     <Content Include="Views\Meeting\Accept.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Home\PushThemAll.cshtml" />
+    <Content Include="Views\Home\PingGator.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

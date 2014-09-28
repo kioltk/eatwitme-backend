@@ -13,5 +13,11 @@ namespace ASP.NET_MVC5.Models
             return AspNetUserRoles.First().AspNetRole.Name; } }
 
 
+
+        public int getMeetingsCount()
+        {
+            return Meetings1.Where(x=>x.confirmer!=null).Count() + Meetings.Count;
+            
+        }
     }
 }

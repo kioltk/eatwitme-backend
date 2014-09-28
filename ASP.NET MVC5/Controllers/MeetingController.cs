@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
-using ASP.NET_MVC5.Models;
 using ASP.NET_MVC5.Service;
 
 namespace ASP.NET_MVC5.Controllers

@@ -8,7 +8,6 @@ namespace ASP.NET_MVC5.Api.Models
     public class MeetingApiModel
     {
         public string id { get; set; }
-        public string creator { get; set; } 
         public string description { get; set; }
         public string longitude { get; set; }
         public string latitude { get; set; }

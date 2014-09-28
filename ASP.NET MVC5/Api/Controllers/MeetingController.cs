@@ -77,9 +77,12 @@ namespace ASP.NET_MVC5.Api.Controllers
 
         [HttpGet]
         [ActionName("history")]
-        public Response History()
+        public Response History(string id = null)
         {
-
+            if (id == null)
+            {
+                id = GetUserId();
+            }
             var meetingRep = new MeetingRepository();
             var meetings = meetingRep.Meetings.Where(
                     meeting =>

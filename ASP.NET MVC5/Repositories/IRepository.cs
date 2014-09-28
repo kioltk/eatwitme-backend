@@ -10,7 +10,7 @@ namespace ASP.NET_MVC5.Repositories
 {
     public class Repository
     {
-        protected ConnectorDataContext context = new ConnectorDataContext(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+        protected static ConnectorDataContext context = new ConnectorDataContext(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
 
         protected bool SubmitChanges()
         {
@@ -24,6 +24,12 @@ namespace ASP.NET_MVC5.Repositories
             {
                 return false;
             }
+        }
+
+        public void Dispose()
+        {
+            
+            context.Dispose();
         }
     }
 }
